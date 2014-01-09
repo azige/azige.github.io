@@ -16,6 +16,6 @@
         <j2se version="1.7+"/>
         <jar href="Java-Web-Start-Test.jar" main="true"/>
     </resources>
-    <application-desc main-class="">
+    <application-desc main-class="io.github.azige.jws.Test">
     </application-desc>
 </jnlp>
