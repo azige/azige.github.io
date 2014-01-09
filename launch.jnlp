@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jnlp codebase="http://azige.github.io/" href="launch.jnlp" spec="1.0+">
+    <information>
+        <title>Java-Web-Start-Test</title>
+        <vendor>Azige</vendor>
+        <homepage href=""/>
+        <description>Java-Web-Start-Test</description>
+        <description kind="short">Java-Web-Start-Test</description>
+    <offline-allowed/>
+</information>
+    <update check="background"/>
+    <security>
+<all-permissions/>
+</security>
+    <resources>
+        <j2se version="1.7+"/>
+        <jar href="Java-Web-Start-Test.jar" main="true"/>
+    </resources>
+    <application-desc main-class="">
+    </application-desc>
+</jnlp>

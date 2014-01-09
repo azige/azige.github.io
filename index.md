@@ -15,3 +15,10 @@ $.getJSON("http://en.gravatar.com/azige.json?callback=?", function(data){
 ---
 
 # Hello world! #
+
+test of a java web start application
+
+<script src="http://java.com/js/deployJava.js"></script>
+<script>
+    deployJava.createWebStartLaunchButton("launch.jnlp")
+</script>
