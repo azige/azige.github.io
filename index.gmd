@@ -9,14 +9,13 @@ ${args.description}
 
 // Start content
 """
-![avatar](${strings.avatarUrl})
-*${strings.displayName}'s home page*
-
----
-
 # Welcome #
 
 The site is under development.
+
+## Blogs
+
+${blogs}
 
 ## Projects
 
@@ -41,8 +40,4 @@ ${project(
   * [【VY1】いつか笑顔、いつも笑顔](http://fc.5sing.com/3216747.html)
 
 [see more](http://www.5sing.com/5212100)
-
----
-
-&copy; 2014 Azige
 """
