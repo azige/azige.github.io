@@ -1,0 +1,10 @@
+title = "微型下载器"
+"""
+# 微型下载器
+
+Java 8 的小练习。尝试利用lambda表达式和方法引用来组织AWT事件处理器。
+
+程序的功能只是输入一个URL并把对应的资源下载下来写入指定的文件里。
+
+<script src="https://gist.github.com/azige/c767f519d09063385ea8.js"></script>
+"""
