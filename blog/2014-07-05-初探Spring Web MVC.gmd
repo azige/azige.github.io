@@ -1,0 +1,7 @@
+title = "³õÌ½Spring Web MVC"
+
+"""
+${new File("blog/2014-07-05-³õÌ½Spring Web MVC.md").text}
+
+${comment}
+"""

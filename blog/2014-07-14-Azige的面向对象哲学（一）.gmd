@@ -1,0 +1,7 @@
+title = "Azige的面向对象哲学（一）"
+
+"""
+${new File("blog/2014-07-14-Azige的面向对象哲学（一）.md").text}
+
+${comment}
+"""

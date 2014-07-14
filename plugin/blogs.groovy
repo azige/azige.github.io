@@ -1,6 +1,8 @@
 def s = new StringBuilder()
 def fileList = new File("blog").listFiles({path -> path.name.endsWith ".gmd"} as FileFilter)
-fileList.sort()
+fileList = fileList.sort{f1, f2 ->
+    -(f1.name <=> f2.name)
+}
 for (def f in fileList){
     def name = f.name.replace(".gmd", "")
     def date = name[0..<10]

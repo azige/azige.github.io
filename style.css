@@ -54,6 +54,7 @@ body {
   padding: 20px;
   max-width: 720px;
   margin: 0 auto;
+  overflow-y: scroll;
 }
 
 body>*:first-child {

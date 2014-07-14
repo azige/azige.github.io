@@ -1,0 +1,5 @@
+title = "个人资料"
+
+"""
+${new File('profile.md').text}
+"""

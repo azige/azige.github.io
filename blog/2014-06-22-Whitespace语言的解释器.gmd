@@ -1,0 +1,7 @@
+title = "Whitespace语言的解释器"
+
+"""
+${new File("blog/2014-06-22-Whitespace语言的解释器.md").text}
+
+${comment}
+"""
