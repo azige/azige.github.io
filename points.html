@@ -15,21 +15,21 @@
 				$('#reserved').text('　')
 				
 				if (base > 2000 || fan >= 5){
-					if (fan >= 13){
-						$('#reserved').text('累计役满')
-						base = 8000
-					}else if (fan == 11 && fan == 12){
-						$('#reserved').text('三倍满')
-						base = 6000
-					}else if (fan >= 8 && fan <= 10){
-						$('#reserved').text('倍满')
-						base = 4000
-					}else if (fan == 6 && fan == 7){
-						$('#reserved').text('跳满')
-						base = 3000
-					}else{
+					if (fan <= 5){
 						$('#reserved').text('满贯')
 						base = 2000
+					}else if (fan <= 7){
+						$('#reserved').text('跳满')
+						base = 3000
+					}else if (fan <= 10){
+						$('#reserved').text('倍满')
+						base = 4000
+					}else if (fan <= 12){
+						$('#reserved').text('三倍满')
+						base = 6000
+					}else{
+						$('#reserved').text('累计役满')
+						base = 8000
 					}
 				}
 				
@@ -78,5 +78,5 @@
 				<td id="koron"></td>
 			</tr>
 		</table>
-	<body>
+	</body>
 </html>
