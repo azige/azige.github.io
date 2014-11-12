@@ -3,42 +3,44 @@
 	<head>
 		<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 		<title>日麻点数计算</title>
-		<script src="http://lib.sinaapp.com/js/jquery/1.7.2/jquery.min.js"></script>
 	</head>
 	<body>
 		<script>
 			function calculate(){
-				var fan = parseInt($('#fan').val())
-				var fu = parseInt($('#fu').val())
+				var fan = parseInt(document.getElementById('fan').value)
+				var fu = parseInt(document.getElementById('fu').value)
 				var base = Math.pow(2, fan + 2) * fu
-				
-				$('#reserved').text('　')
+				var reserved = document.getElementById('reserved')
 				
 				if (base > 2000 || fan >= 5){
 					if (fan <= 5){
-						$('#reserved').text('满贯')
+						reserved.textContent = '满贯'
 						base = 2000
 					}else if (fan <= 7){
-						$('#reserved').text('跳满')
+						reserved.textContent = '跳满'
 						base = 3000
 					}else if (fan <= 10){
-						$('#reserved').text('倍满')
+						reserved.textContent = '倍满'
 						base = 4000
 					}else if (fan <= 12){
-						$('#reserved').text('三倍满')
+						reserved.textContent = '三倍满'
 						base = 6000
 					}else{
-						$('#reserved').text('累计役满')
+						reserved.textContent = '累计役满'
 						base = 8000
 					}
+				}else{
+					reserved.textContent = '　'
 				}
 				
-				$('#oyatsumo').text(foo(base * 2))
-				$('#oyaron').text(foo(base * 6))
-				$('#kotsumo').text(foo(base) + '·' + foo(base * 2))
-				$('#koron').text(foo(base * 4))
+				document.getElementById('oyatsumo').textContent = foo(base * 2)
+				document.getElementById('oyaron').textContent = foo(base * 6)
+				document.getElementById('kotsumo').textContent = foo(base) + '·' + foo(base * 2)
+				document.getElementById('koron').textContent = foo(base * 4)
 			}
 			
+			// 向上取整到千位
+			// TODO: 重命名此方法
 			function foo(n){
 				if (n % 100 > 0){
 					return (Math.ceil(n / 100)) * 100
@@ -46,8 +48,36 @@
 				return n
 			}
 		</script>
-		<input type="text" id="fan">翻
-		<input type="text" id="fu">符
+		<select id="fan">
+			<option>1</option>
+			<option>2</option>
+			<option>3</option>
+			<option>4</option>
+			<option>5</option>
+			<option>6</option>
+			<option>7</option>
+			<option>8</option>
+			<option>9</option>
+			<option>10</option>
+			<option>11</option>
+			<option>12</option>
+			<option>13</option>
+		</select>
+		翻
+		<select id="fu">
+			<option>20</option>
+			<option>25</option>
+			<option>30</option>
+			<option>40</option>
+			<option>50</option>
+			<option>60</option>
+			<option>70</option>
+			<option>80</option>
+			<option>90</option>
+			<option>100</option>
+			<option>110</option>
+		</select>
+		符
 		<input type="button" value="计算" onclick="calculate()">
 		<table>
 			<tr>
