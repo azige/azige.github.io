@@ -12,7 +12,11 @@
 				var base = Math.pow(2, fan + 2) * fu
 				var reserved = document.getElementById('reserved')
 				
-				if (base > 2000 || fan >= 5){
+				if (base > 1900 && document.getElementById('kiriagemangan').checked){
+					base = 2000
+				}
+				
+				if (base >= 2000 || fan >= 5){
 					if (fan <= 5){
 						reserved.textContent = '满贯'
 						base = 2000
@@ -33,10 +37,20 @@
 					reserved.textContent = '　'
 				}
 				
-				document.getElementById('oyatsumo').textContent = foo(base * 2)
-				document.getElementById('oyaron').textContent = foo(base * 6)
-				document.getElementById('kotsumo').textContent = foo(base) + '·' + foo(base * 2)
-				document.getElementById('koron').textContent = foo(base * 4)
+				var oyatsumo = document.getElementById('oyatsumo')
+				var oyaron = document.getElementById('oyaron')
+				var kotsumo = document.getElementById('kotsumo')
+				var koron = document.getElementById('koron')
+				var sanma = document.getElementById('sanma')
+				if (sanma.checked){
+					oyatsumo.textContent = foo(base * 3)
+					kotsumo.textContent = foo(base * 1.5) + '·' + foo(base * 2.5)
+				}else{
+					oyatsumo.textContent = foo(base * 2)
+					kotsumo.textContent = foo(base) + '·' + foo(base * 2)
+				}
+				oyaron.textContent = foo(base * 6)
+				koron.textContent = foo(base * 4)
 			}
 			
 			// 向上取整到千位
@@ -46,6 +60,12 @@
 					return (Math.ceil(n / 100)) * 100
 				}
 				return n
+			}
+			
+			function showComment(boxName){
+				var box = document.getElementById(boxName)
+				var comment = document.getElementById(boxName + 'Comment')
+				comment.hidden = !box.checked
 			}
 		</script>
 		<select id="fan">
@@ -79,13 +99,19 @@
 		</select>
 		符
 		<input type="button" value="计算" onclick="calculate()">
+		<br>
+		<input id="kiriagemangan" type="checkbox" onclick="showComment('kiriagemangan')">进位满贯（切り上げ満貫）
+		<span id="kiriagemanganComment" hidden="true">—— 基本点超过1900时即视为满贯。</span>
+		<br>
+		<input id="sanma" type="checkbox" onclick="showComment('sanma')">三麻
+		<span id="sanmaComment" hidden="true">—— 闲家自摸使用3:5分配法，即两家平分缺的那一家应付的点数。</span>
 		<table>
 			<tr>
 				<td id="reserved" width="80">　</td>
 			</tr>
 			<tr height=30></tr>
 			<tr>
-				<td>亲</td>
+				<td>庄家</td>
 			</tr>
 			<tr>
 				<td>自摸</td>
@@ -97,7 +123,7 @@
 			</tr>
 			<tr height=30></tr>
 			<tr>
-				<td>子</td>
+				<td>闲家</td>
 			</tr>
 			<tr>
 				<td>自摸</td>
