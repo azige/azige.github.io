@@ -2,9 +2,17 @@
 <html>
 	<head>
 		<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1">
+		<style>
+			@media screen and (min-width: 360px) {
+				body {
+					width: 360px; margin: auto;
+				}
+			}
+		</style>
 		<title>日麻点数计算</title>
 	</head>
-	<body style="width: 360px; margin: auto;">
+	<body>
 		<script>
 			function calculate(){
 				var fan = parseInt(document.getElementById('fan').value)
@@ -49,12 +57,12 @@
 					oyatsumo.textContent = kiriage(base * 2)
 					kotsumo.textContent = kiriage(base) + '·' + kiriage(base * 2)
 				}
-				if (fu != 20){
-					oyaron.textContent = kiriage(base * 6)
-					koron.textContent = kiriage(base * 4)
-				}else{
+				if (fu == 20){
 					oyaron.textContent = "-"
 					koron.textContent = "-"
+				}else{
+					oyaron.textContent = kiriage(base * 6)
+					koron.textContent = kiriage(base * 4)
 				}
 			}
 			
@@ -108,11 +116,15 @@
 		<br>
 		<input id="kiriagemangan" type="checkbox" onclick="showComment('kiriagemangan')">进位满贯（切り上げ満貫）
 		<br>
-		<span id="kiriagemanganComment" style="visibility: hidden;">　　基本点超过1900时即视为满贯。</span>
+		<span id="kiriagemanganComment" style="visibility: hidden;">
+		　　基本点超过1900时即视为满贯。
+		</span>
 		<br>
-		<input id="sanma" type="checkbox" onclick="showComment('sanma')">三麻
+		<input id="sanma" type="checkbox" onclick="showComment('sanma')">三麻 3:5 分配
 		<br>
-		<span id="sanmaComment" style="visibility: hidden;">　闲家自摸使用3:5分配法，即两家平分缺的那一家应付的点数。</span>
+		<span id="sanmaComment" style="visibility: hidden;">
+		　　即两家平分缺的那一家应付的点数，其它分配法参考四麻即可。
+		</span>
 		<table>
 			<tr>
 				<td id="reserved" width="80">　</td>
