@@ -4,7 +4,7 @@
 		<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 		<title>日麻点数计算</title>
 	</head>
-	<body>
+	<body style="width: 360px; margin: auto;">
 		<script>
 			function calculate(){
 				var fan = parseInt(document.getElementById('fan').value)
@@ -43,19 +43,23 @@
 				var koron = document.getElementById('koron')
 				var sanma = document.getElementById('sanma')
 				if (sanma.checked){
-					oyatsumo.textContent = foo(base * 3)
-					kotsumo.textContent = foo(base * 1.5) + '·' + foo(base * 2.5)
+					oyatsumo.textContent = kiriage(base * 3)
+					kotsumo.textContent = kiriage(base * 1.5) + '·' + kiriage(base * 2.5)
 				}else{
-					oyatsumo.textContent = foo(base * 2)
-					kotsumo.textContent = foo(base) + '·' + foo(base * 2)
+					oyatsumo.textContent = kiriage(base * 2)
+					kotsumo.textContent = kiriage(base) + '·' + kiriage(base * 2)
 				}
-				oyaron.textContent = foo(base * 6)
-				koron.textContent = foo(base * 4)
+				if (fu != 20){
+					oyaron.textContent = kiriage(base * 6)
+					koron.textContent = kiriage(base * 4)
+				}else{
+					oyaron.textContent = "-"
+					koron.textContent = "-"
+				}
 			}
 			
 			// 向上取整到千位
-			// TODO: 重命名此方法
-			function foo(n){
+			function kiriage(n){
 				if (n % 100 > 0){
 					return (Math.ceil(n / 100)) * 100
 				}
@@ -65,9 +69,11 @@
 			function showComment(boxName){
 				var box = document.getElementById(boxName)
 				var comment = document.getElementById(boxName + 'Comment')
-				comment.hidden = !box.checked
+				comment.style.visibility = box.checked? "visible" : "hidden"
 			}
 		</script>
+		<p style="font-size: 24px; font-weight: bold; text-align: center;">Azige 的简易日麻点数计算器</p>
+		<hr>
 		<select id="fan">
 			<option>1</option>
 			<option>2</option>
@@ -87,7 +93,7 @@
 		<select id="fu">
 			<option>20</option>
 			<option>25</option>
-			<option>30</option>
+			<option selected="selected">30</option>
 			<option>40</option>
 			<option>50</option>
 			<option>60</option>
@@ -101,10 +107,12 @@
 		<input type="button" value="计算" onclick="calculate()">
 		<br>
 		<input id="kiriagemangan" type="checkbox" onclick="showComment('kiriagemangan')">进位满贯（切り上げ満貫）
-		<span id="kiriagemanganComment" hidden="true">—— 基本点超过1900时即视为满贯。</span>
+		<br>
+		<span id="kiriagemanganComment" style="visibility: hidden;">　　基本点超过1900时即视为满贯。</span>
 		<br>
 		<input id="sanma" type="checkbox" onclick="showComment('sanma')">三麻
-		<span id="sanmaComment" hidden="true">—— 闲家自摸使用3:5分配法，即两家平分缺的那一家应付的点数。</span>
+		<br>
+		<span id="sanmaComment" style="visibility: hidden;">　闲家自摸使用3:5分配法，即两家平分缺的那一家应付的点数。</span>
 		<table>
 			<tr>
 				<td id="reserved" width="80">　</td>
