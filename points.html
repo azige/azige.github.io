@@ -221,8 +221,8 @@
 				var kotsumo = document.getElementById('kotsumo')
 				var koron = document.getElementById('koron')
 				var sanma = document.getElementById('sanma')
-				// 七对自摸至少3翻
-				if (fu == 25 && fan < 3){
+				// 自摸平至少2翻，七对自摸至少3翻
+				if ((fu == 20 && fan < 2) || (fu == 25 && fan < 3)){
 					oyatsumo.textContent = '-'
 					kotsumo.textContent = '-'
 				}else{
