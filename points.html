@@ -75,7 +75,8 @@
 				width: 360px; margin: auto;
 			}
 			#reserved{
-				display: none;
+				color: #E61C64;
+				font-weight: bold;
 			}
 			input[type="checkbox"] {
 			    display:none;
@@ -206,7 +207,7 @@
 						base = 8000
 					}
 				}else{
-					reserved.textContent = '　'
+					reserved.textContent = fan + '翻' + fu + '符'
 				}
 				
 				var oyatsumo = document.getElementById('oyatsumo')
@@ -214,19 +215,26 @@
 				var kotsumo = document.getElementById('kotsumo')
 				var koron = document.getElementById('koron')
 				var sanma = document.getElementById('sanma')
-				if (sanma.checked){
-					oyatsumo.textContent = kiriage(base * 3)
-					kotsumo.textContent = kiriage(base * 1.5) + '·' + kiriage(base * 2.5)
+				// 七对自摸至少3翻
+				if (fu == 25 && fan < 3){
+					oyatsumo.textContent = '-'
+					kotsumo.textContent = '-'
 				}else{
-					oyatsumo.textContent = kiriage(base * 2)
-					kotsumo.textContent = kiriage(base) + '·' + kiriage(base * 2)
+					if (sanma.checked){
+						oyatsumo.textContent = kiriage(base * 3)
+						kotsumo.textContent = kiriage(base * 1.5) + '·' + kiriage(base * 2.5)
+					}else{
+						oyatsumo.textContent = kiriage(base * 2)
+						kotsumo.textContent = kiriage(base) + '·' + kiriage(base * 2)
+					}
 				}
-				if (fu != 20){
-					oyaron.textContent = kiriage(base * 6)
-					koron.textContent = kiriage(base * 4)
-				}else{
+				// 20符只有自摸平，七对至少2翻
+				if (fu == 20 || fu == 25 && fan < 2){
 					oyaron.textContent = "-"
 					koron.textContent = "-"
+				}else{
+					oyaron.textContent = kiriage(base * 6)
+					koron.textContent = kiriage(base * 4)
 				}
 			}
 			
@@ -279,11 +287,7 @@
 		<table class="result">
 			<tbody>
 			<tr>
-				<td id="reserved" colspan="2">　</td>
-			</tr>
-			<tr></tr>
-			<tr>
-				<td></td>
+				<td id="reserved"></td>
 				<td>庄家</td>
 				<td>闲家</td>
 			</tr>
