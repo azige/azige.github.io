@@ -1,12 +1,157 @@
-<!DOCTYPE HTML>
-<html>
-	<head>
-		<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
-		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1">
+<!DOCTYPE html>
+<!-- saved from url=(0032)http://azige.miku.la/points.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1">
 		<style>
-			@media screen and (min-width: 360px) {
+			/* UI optimized by Toufukun */
+			body {
+				font-family: sans-serif;
+				line-height: 1.5em;
+			}
+			.title {
+				color: #E61C64;
+				text-align: center;
+				font-size: 2em;
+				font-weight: bold;
+			}
+			button {
+				background: #E61C64;
+				color: #FFF;
+				border: 0;
+				font-size: 1em;
+				padding: .2em 1em;
+				border-radius: 1px;
+				box-shadow: 0px 1px 4px #888888;
+			}
+			.fantable {
+				border-collapse: collapse;
+				width: 100%;
+				margin: 1em 0;
+			}
+			.fantable .disp{
+				width: 3em;
+			}
+			.fantable td {
+				border: #CCC solid 1px;
+				/*padding: .5em 0 .5em 0;*/
+				font-weight: normal;
+				width: 1.2em;
+				text-align: center; 
+				vertical-align: middle;
+				height: 2em;
+			}
+			.fantable td.selected {
+				background: #E61C64;
+				color: #FFF;
+				/*font-weight: bold;*/
+				border-color: #E61C64;
+			}
+			.big {
+				color: #E61C64;
+				font-size: 1.5em;
+				font-weight: bold;
+				/*font-style: italic;*/
+			}
+			.main {
+				width: 360px; margin: auto;
+			}
+			#reserved{
+				display: none;
+			}
+			input[type="checkbox"] {
+			    display:none;
+			}
+			input[type="checkbox"] + label span {
+			    display:inline-block;
+			    width: 10px;
+			    height: 10px;
+			    margin:-1px 4px 0 0;
+			    vertical-align:middle;
+			    border: #E61C64 2px solid;
+			    cursor: pointer;
+			}
+			input[type="checkbox"]:checked + label span {
+			    background: #E61C64;
+			}
+			table.result {
+				width: 100%;
+				table-layout:fixed;
+				margin-bottom: 1.5em 0;
+			}
+			a {
+				color: #E61C64;
+				text-decoration: underline;
+			}
+			.options {
+				width: 100%;
+				margin: 1em 0;
+			}
+			/*td {
+				height: 2em;
+			}*/
+			.blackbg {
+				display: none;
+				position: absolute;
+				top: 0; left: 0;
+				width: 100%;
+				height: 100%;
+				background: rgba(0,0,0,0.6);
+				z-index: 1000;
+			}
+			.btncalc {
+				width: 100%;
+				margin-top: 1.5em;
+				padding: .5em;
+			}
+			.commentwindow{
+				display: none;
+				position: relative;
+				width: 20em;
+				margin-left: auto;
+				margin-right: auto;
+				top: 30%;
+				background: #fff;
+				border-radius: 1px;
+				box-shadow: 0px 5px 10px rgba(0,0,0,0.6);
+				padding: 16px;
+				z-index: 1001;
+			}
+			@media screen and (max-width: 480px) {
 				body {
-					width: 360px; margin: auto;
+					width: auto;
+					margin: 0;
+				}
+				.title {
+					font-size: 1em;
+					height: 3em;
+					width: 100%;
+					background: #E61C64;
+					display: table;
+					margin-bottom: 16px;
+					box-shadow: 0px 1px 2px #AAAAAA;
+					text-align: left;
+				}
+				.title p {
+					vertical-align: middle;
+					color: #FFF;
+					display:table-cell; 
+    				vertical-align: middle;
+    				padding-left: 16px;
+				}
+				hr { display: none; }
+				.main {
+					width: 320px;
+					margin-left: auto;
+					margin-right: auto;
+				}
+				.commentwindow{
+					width: 12em;
+				}
+			}
+			@media screen and (max-width: 320px) {
+				.main {
+					width: auto;
+					margin: 0 .5em 0 .5em;
 				}
 			}
 		</style>
@@ -57,12 +202,12 @@
 					oyatsumo.textContent = kiriage(base * 2)
 					kotsumo.textContent = kiriage(base) + '·' + kiriage(base * 2)
 				}
-				if (fu == 20){
-					oyaron.textContent = "-"
-					koron.textContent = "-"
-				}else{
+				if (fu != 20){
 					oyaron.textContent = kiriage(base * 6)
 					koron.textContent = kiriage(base * 4)
+				}else{
+					oyaron.textContent = "-"
+					koron.textContent = "-"
 				}
 			}
 			
@@ -77,82 +222,143 @@
 			function showComment(boxName){
 				var box = document.getElementById(boxName)
 				var comment = document.getElementById(boxName + 'Comment')
-				comment.style.visibility = box.checked? "visible" : "hidden"
+				comment.style.display = box.checked? "block" : "none"
+			}
+
+			function setFan(e){
+				var x = document.getElementById("fantable").getElementsByTagName("td");
+				for (i in x)
+					if (x[i].className!="disp")
+						x[i].className = "";
+				e.className="selected";
+				document.getElementById("fan").value=e.innerHTML;
+				document.getElementById("fans").innerHTML=e.innerHTML;
+			}
+			function setFu(e){
+				var x = document.getElementById("futable").getElementsByTagName("td");
+				for (i in x)
+					if (x[i].className!="disp")
+						x[i].className = "";
+				e.className="selected";
+				document.getElementById("fu").value=e.innerHTML;
+				document.getElementById("fus").innerHTML=e.innerHTML;
+			}
+			function showComment(c){
+				document.getElementById("comment").innerHTML=c;
+				document.getElementById("blackbg").style.display="block";
+				document.getElementById("commentwindow").style.display="block";
+			}
+			function hideComment(){
+				document.getElementById("blackbg").style.display="none";
+				document.getElementById("commentwindow").style.display="none";
 			}
 		</script>
-		<p style="font-size: 24px; font-weight: bold; text-align: center;">Azige 的简易日麻点数计算器</p>
-		<hr>
-		<select id="fan">
-			<option>1</option>
-			<option>2</option>
-			<option>3</option>
-			<option>4</option>
-			<option>5</option>
-			<option>6</option>
-			<option>7</option>
-			<option>8</option>
-			<option>9</option>
-			<option>10</option>
-			<option>11</option>
-			<option>12</option>
-			<option>13</option>
-		</select>
-		翻
-		<select id="fu">
-			<option>20</option>
-			<option>25</option>
-			<option selected="selected">30</option>
-			<option>40</option>
-			<option>50</option>
-			<option>60</option>
-			<option>70</option>
-			<option>80</option>
-			<option>90</option>
-			<option>100</option>
-			<option>110</option>
-		</select>
-		符
-		<input type="button" value="计算" onclick="calculate()">
-		<br>
-		<input id="kiriagemangan" type="checkbox" onclick="showComment('kiriagemangan')">进位满贯（切り上げ満貫）
-		<br>
-		<span id="kiriagemanganComment" style="visibility: hidden;">
-		　　基本点超过1900时即视为满贯。
-		</span>
-		<br>
-		<input id="sanma" type="checkbox" onclick="showComment('sanma')">三麻 3:5 分配
-		<br>
-		<span id="sanmaComment" style="visibility: hidden;">
-		　　即两家平分缺的那一家应付的点数，其它分配法参考四麻即可。
-		</span>
-		<table>
+		<div class="title"> <p>Azige 的简易日麻点数计算器</p>
+		<!-- <hr/> -->
+		</div>
+		<div class="main">
+		<table class="result">
+			<tbody>
 			<tr>
-				<td id="reserved" width="80">　</td>
+				<td id="reserved" colspan="2">　</td>
 			</tr>
-			<tr height=30></tr>
+			<tr></tr>
 			<tr>
+				<td></td>
 				<td>庄家</td>
-			</tr>
-			<tr>
-				<td>自摸</td>
-				<td id="oyatsumo"></td>
-			</tr>
-			<tr>
-				<td>荣和</td>
-				<td id="oyaron"></td> 
-			</tr>
-			<tr height=30></tr>
-			<tr>
 				<td>闲家</td>
 			</tr>
 			<tr>
 				<td>自摸</td>
-				<td id="kotsumo"></td>
+				<td id="oyatsumo">-</td>
+				<td id="kotsumo">-</td>
 			</tr>
 			<tr>
 				<td>荣和</td>
-				<td id="koron"></td>
+				<td id="oyaron">-</td> 
+				<td id="koron">-</td>
+			</tr>
+		</tbody></table>
+		<table class="fantable" id="fantable">
+			<tr>
+				<td rowspan="2" class="disp"><span class="big" id="fans">1</span><br/>翻</td>
+				<td onclick="setFan(this)" class="selected">1</td>
+				<td onclick="setFan(this)">2</td>
+				<td onclick="setFan(this)">3</td>
+				<td onclick="setFan(this)">4</td>
+				<td onclick="setFan(this)">5</td>
+				<td onclick="setFan(this)">6</td>
+				<td onclick="setFan(this)">7</td>
+			</tr>
+			<tr>
+				<td onclick="setFan(this)">8</td>
+				<td onclick="setFan(this)">9</td>
+				<td onclick="setFan(this)">10</td>
+				<td onclick="setFan(this)">11</td>
+				<td onclick="setFan(this)">12</td>
+				<td onclick="setFan(this)">13</td>
+				<td/>
 			</tr>
 		</table>
-	</body>
-</html>
+		<input id="fan" type="hidden" value="1"/>
+		<table class="fantable" id="futable">
+			<tr>
+				<td rowspan="2" class="disp"><span class="big" id="fus">30</span><br/>符</td>
+				<td onclick="setFu(this)">20</td>
+				<td onclick="setFu(this)">25</td>
+				<td onclick="setFu(this)" class="selected">30</td>
+				<td onclick="setFu(this)">40</td>
+				<td onclick="setFu(this)">50</td>
+				<td onclick="setFu(this)">60</td>
+			</tr>
+			<tr>
+				<td onclick="setFu(this)">70</td>
+				<td onclick="setFu(this)">80</td>
+				<td onclick="setFu(this)">90</td>
+				<td onclick="setFu(this)">100</td>
+				<td onclick="setFu(this)">110</td>
+				<td/>
+			</tr>
+		</table>
+		<input id="fu" type="hidden" value="30"/>
+		<table class="options">
+			<tr>
+				<td colspan="2">
+					<input type="checkbox" id="kiriagemangan" />
+					<label for="kiriagemangan"><span></span>进位满贯<jp lang="ja-JP">（切り上げ満貫）</jp> </label>
+					<a href="javascript:showComment('基本点超过1900时即视为满贯。')">[?]</a>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="checkbox" id="sanma" />
+					<label for="sanma"><span></span>三麻</label>
+					<a href="javascript:showComment('闲家自摸使用3:5分配法，即两家平分缺的那一家应付的点数。')">[?]</a>
+				</td>
+				<td style="text-align: right;">
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<button onclick="calculate()" class="btncalc">计算</button>	 
+				</td>
+			</tr>
+		</table>
+		<div class="blackbg" id="blackbg" />
+		<div class="commentwindow" id="commentwindow">
+			<table style="width: 100%;">
+				<tr>
+					<td>
+						<span id="comment">然而并没有什么卵用。</span>
+					</td>
+				</tr>
+				<tr>
+					<td style="text-align: center;">
+						<button onclick="hideComment()" style="margin-top: 1em;" >好的么</button>	
+					</td>
+				</tr>
+			</table>
+		</div>
+		</div>
+	
+</body></html>
