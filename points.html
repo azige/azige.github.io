@@ -20,408 +20,409 @@
 
   0. You just DO WHAT THE FUCK YOU WANT TO.
 -->
-<html><head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1">
-<meta name="theme-color" content="#E61C64">
-		<style>
-			/* UI optimized by Toufukun */
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1">
+	<meta name="theme-color" content="#E61C64">
+	<style>
+		/* UI optimized by Toufukun */
+		body {
+			font-family: sans-serif;
+			line-height: 1.5em;
+		}
+		.title {
+			color: #E61C64;
+			text-align: center;
+			font-size: 2em;
+			font-weight: bold;
+		}
+		.bottom {
+			color: #AAA;
+			text-align: center;
+			font-size: 0.75em;
+		}
+		button {
+			background: #E61C64;
+			color: #FFF;
+			border: 0;
+			font-size: 1em;
+			padding: .2em 1em;
+			border-radius: 1px;
+			box-shadow: 0px 1px 4px #888888;
+		}
+		button:active {
+			background: #800f37;
+		}
+		.fantable {
+			border-collapse: collapse;
+			width: 100%;
+			margin: 1em 0;
+		}
+		.fantable .disp {
+			width: 3em;
+			cursor: auto;
+		}
+		.fantable td {
+			border: #CCC solid 1px;
+			/*padding: .5em 0 .5em 0;*/
+			font-weight: normal;
+			width: 1.2em;
+			text-align: center; 
+			vertical-align: middle;
+			height: 2em;
+			cursor: pointer;
+		}
+		.fantable td.selected {
+			background: #E61C64;
+			color: #FFF;
+			/*font-weight: bold;*/
+			border-color: #E61C64;
+		}
+		/*.fantable td:active {
+			color: #FFF;
+			background: #800f37;
+		}*/
+		.big {
+			color: #E61C64;
+			font-size: 1.5em;
+			font-weight: bold;
+			/*font-style: italic;*/
+		}
+		.main {
+			width: 360px; margin: auto;
+		}
+		#reserved {
+			color: #E61C64;
+			font-weight: bold;
+		}
+		input[type="checkbox"] {
+		    display:none;
+		}
+		input[type="checkbox"] + label {
+			cursor: pointer;
+		}
+		input[type="checkbox"] + label span {
+		    display:inline-block;
+		    width: 10px;
+		    height: 10px;
+		    margin:-1px 4px 0 0;
+		    vertical-align:middle;
+		    border: #E61C64 2px solid;
+		    cursor: pointer;
+		}
+		input[type="checkbox"]:checked + label span {
+		    background: #E61C64;
+		}
+		table.result {
+			width: 100%;
+			table-layout:fixed;
+			margin-bottom: 1.5em 0;
+		}
+		a {
+			color: #E61C64;
+			text-decoration: underline;
+		}
+		.options {
+			width: 100%;
+			margin: 1em 0;
+		}
+		/*td {
+			height: 2em;
+		}*/
+		.blackbg {
+			display: none;
+			position: absolute;
+			top: 0; left: 0;
+			width: 100%;
+			height: 100%;
+			background: rgba(0,0,0,0.6);
+			z-index: 1000;
+		}
+		.btncalc {
+			width: 100%;
+			margin-top: 1.5em;
+			padding: .5em;
+		}
+		.commentwindow{
+			display: none;
+			position: relative;
+			width: 20em;
+			margin-left: auto;
+			margin-right: auto;
+			top: 30%;
+			background: #fff;
+			border-radius: 1px;
+			box-shadow: 0px 5px 10px rgba(0,0,0,0.6);
+			padding: 16px;
+			z-index: 1001;
+		}
+		@media screen and (max-width: 480px) {
 			body {
-				font-family: sans-serif;
-				line-height: 1.5em;
+				width: auto;
+				margin: 0;
 			}
 			.title {
-				color: #E61C64;
-				text-align: center;
-				font-size: 2em;
-				font-weight: bold;
-			}
-			.bottom {
-				color: #AAA;
-				text-align: center;
-				font-size: 0.75em;
-			}
-			button {
-				background: #E61C64;
-				color: #FFF;
-				border: 0;
 				font-size: 1em;
-				padding: .2em 1em;
-				border-radius: 1px;
-				box-shadow: 0px 1px 4px #888888;
-			}
-			button:active {
-				background: #800f37;
-			}
-			.fantable {
-				border-collapse: collapse;
+				height: 3em;
 				width: 100%;
-				margin: 1em 0;
-			}
-			.fantable .disp {
-				width: 3em;
-				cursor: auto;
-			}
-			.fantable td {
-				border: #CCC solid 1px;
-				/*padding: .5em 0 .5em 0;*/
-				font-weight: normal;
-				width: 1.2em;
-				text-align: center; 
-				vertical-align: middle;
-				height: 2em;
-				cursor: pointer;
-			}
-			.fantable td.selected {
 				background: #E61C64;
-				color: #FFF;
-				/*font-weight: bold;*/
-				border-color: #E61C64;
+				display: table;
+				margin-bottom: 16px;
+				box-shadow: 0px 1px 2px #AAAAAA;
+				text-align: left;
 			}
-			/*.fantable td:active {
+			.title p {
+				vertical-align: middle;
 				color: #FFF;
-				background: #800f37;
-			}*/
-			.big {
-				color: #E61C64;
-				font-size: 1.5em;
-				font-weight: bold;
-				/*font-style: italic;*/
+				display:table-cell; 
+				vertical-align: middle;
+				padding-left: 16px;
 			}
+			hr { display: none; }
 			.main {
-				width: 360px; margin: auto;
-			}
-			#reserved {
-				color: #E61C64;
-				font-weight: bold;
-			}
-			input[type="checkbox"] {
-			    display:none;
-			}
-			input[type="checkbox"] + label {
-				cursor: pointer;
-			}
-			input[type="checkbox"] + label span {
-			    display:inline-block;
-			    width: 10px;
-			    height: 10px;
-			    margin:-1px 4px 0 0;
-			    vertical-align:middle;
-			    border: #E61C64 2px solid;
-			    cursor: pointer;
-			}
-			input[type="checkbox"]:checked + label span {
-			    background: #E61C64;
-			}
-			table.result {
-				width: 100%;
-				table-layout:fixed;
-				margin-bottom: 1.5em 0;
-			}
-			a {
-				color: #E61C64;
-				text-decoration: underline;
-			}
-			.options {
-				width: 100%;
-				margin: 1em 0;
-			}
-			/*td {
-				height: 2em;
-			}*/
-			.blackbg {
-				display: none;
-				position: absolute;
-				top: 0; left: 0;
-				width: 100%;
-				height: 100%;
-				background: rgba(0,0,0,0.6);
-				z-index: 1000;
-			}
-			.btncalc {
-				width: 100%;
-				margin-top: 1.5em;
-				padding: .5em;
-			}
-			.commentwindow{
-				display: none;
-				position: relative;
-				width: 20em;
+				width: 320px;
 				margin-left: auto;
 				margin-right: auto;
-				top: 30%;
-				background: #fff;
-				border-radius: 1px;
-				box-shadow: 0px 5px 10px rgba(0,0,0,0.6);
-				padding: 16px;
-				z-index: 1001;
 			}
-			@media screen and (max-width: 480px) {
-				body {
-					width: auto;
-					margin: 0;
-				}
-				.title {
-					font-size: 1em;
-					height: 3em;
-					width: 100%;
-					background: #E61C64;
-					display: table;
-					margin-bottom: 16px;
-					box-shadow: 0px 1px 2px #AAAAAA;
-					text-align: left;
-				}
-				.title p {
-					vertical-align: middle;
-					color: #FFF;
-					display:table-cell; 
-					vertical-align: middle;
-					padding-left: 16px;
-				}
-				hr { display: none; }
-				.main {
-					width: 320px;
-					margin-left: auto;
-					margin-right: auto;
-				}
-				.commentwindow {
-					width: 12em;
-				}
+			.commentwindow {
+				width: 12em;
 			}
-			@media screen and (max-width: 320px) {
-				.main {
-					width: auto;
-					margin: 0 .5em 0 .5em;
-				}
+		}
+		@media screen and (max-width: 320px) {
+			.main {
+				width: auto;
+				margin: 0 .5em 0 .5em;
 			}
-		</style>
+		}
+	</style>
 	<title>日麻点数计算</title>
-	</head>
-	<body onload="init()">
-		<script>
-			function calculate(){
-				var fan = parseInt(document.getElementById('fan').value)
-				var fu = parseInt(document.getElementById('fu').value)
-				var base = Math.pow(2, fan + 2) * fu
-				var reserved = document.getElementById('reserved')
-				
-				if (base > 1900 && document.getElementById('kiriagemangan').checked){
+</head>
+<body onload="init()">
+	<script>
+		function calculate(){
+			var fan = parseInt(document.getElementById('fan').value)
+			var fu = parseInt(document.getElementById('fu').value)
+			var base = Math.pow(2, fan + 2) * fu
+			var reserved = document.getElementById('reserved')
+			
+			if (base > 1900 && document.getElementById('kiriagemangan').checked){
+				base = 2000
+			}
+			
+			if (base >= 2000 || fan >= 5){
+				if (fan <= 5){
+					reserved.textContent = '满贯'
 					base = 2000
-				}
-				
-				if (base >= 2000 || fan >= 5){
-					if (fan <= 5){
-						reserved.textContent = '满贯'
-						base = 2000
-					}else if (fan <= 7){
-						reserved.textContent = '跳满'
-						base = 3000
-					}else if (fan <= 10){
-						reserved.textContent = '倍满'
-						base = 4000
-					}else if (fan <= 12){
-						reserved.textContent = '三倍满'
-						base = 6000
-					}else{
-						reserved.textContent = '累计役满'
-						base = 8000
-					}
+				}else if (fan <= 7){
+					reserved.textContent = '跳满'
+					base = 3000
+				}else if (fan <= 10){
+					reserved.textContent = '倍满'
+					base = 4000
+				}else if (fan <= 12){
+					reserved.textContent = '三倍满'
+					base = 6000
 				}else{
-					reserved.textContent = fan + '翻' + fu + '符'
+					reserved.textContent = '累计役满'
+					base = 8000
 				}
-				
-				var oyatsumo = document.getElementById('oyatsumo')
-				var oyaron = document.getElementById('oyaron')
-				var kotsumo = document.getElementById('kotsumo')
-				var koron = document.getElementById('koron')
-				var sanma = document.getElementById('sanma')
-				// 自摸平至少2翻，七对自摸至少3翻
-				if ((fu == 20 && fan < 2) || (fu == 25 && fan < 3)){
-					oyatsumo.textContent = '-'
-					kotsumo.textContent = '-'
-				}else{
-					if (sanma.checked){
-						oyatsumo.textContent = kiriage(base * 3)
-						kotsumo.textContent = kiriage(base * 1.5) + '·' + kiriage(base * 2.5)
-					}else{
-						oyatsumo.textContent = kiriage(base * 2)
-						kotsumo.textContent = kiriage(base) + '·' + kiriage(base * 2)
-					}
-				}
-				// 20符只有自摸平，七对至少2翻
-				if (fu == 20 || fu == 25 && fan < 2){
-					oyaron.textContent = "-"
-					koron.textContent = "-"
-				}else{
-					oyaron.textContent = kiriage(base * 6)
-					koron.textContent = kiriage(base * 4)
-				}
+			}else{
+				reserved.textContent = fan + '翻' + fu + '符'
 			}
 			
-			// 向上取整到千位
-			function kiriage(n){
-				if (n % 100 > 0){
-					return (Math.ceil(n / 100)) * 100
+			var oyatsumo = document.getElementById('oyatsumo')
+			var oyaron = document.getElementById('oyaron')
+			var kotsumo = document.getElementById('kotsumo')
+			var koron = document.getElementById('koron')
+			var sanma = document.getElementById('sanma')
+			// 自摸平至少2翻，七对自摸至少3翻
+			if ((fu == 20 && fan < 2) || (fu == 25 && fan < 3)){
+				oyatsumo.textContent = '-'
+				kotsumo.textContent = '-'
+			}else{
+				if (sanma.checked){
+					oyatsumo.textContent = kiriage(base * 3)
+					kotsumo.textContent = kiriage(base * 1.5) + '·' + kiriage(base * 2.5)
+				}else{
+					oyatsumo.textContent = kiriage(base * 2)
+					kotsumo.textContent = kiriage(base) + '·' + kiriage(base * 2)
 				}
-				return n
 			}
-			
-			function showComment(boxName){
-				var box = document.getElementById(boxName)
-				var comment = document.getElementById(boxName + 'Comment')
-				comment.style.display = box.checked? "block" : "none"
+			// 20符只有自摸平，七对至少2翻
+			if (fu == 20 || fu == 25 && fan < 2){
+				oyaron.textContent = "-"
+				koron.textContent = "-"
+			}else{
+				oyaron.textContent = kiriage(base * 6)
+				koron.textContent = kiriage(base * 4)
 			}
+		}
+		
+		// 向上取整到千位
+		function kiriage(n){
+			if (n % 100 > 0){
+				return (Math.ceil(n / 100)) * 100
+			}
+			return n
+		}
+		
+		function showComment(boxName){
+			var box = document.getElementById(boxName)
+			var comment = document.getElementById(boxName + 'Comment')
+			comment.style.display = box.checked? "block" : "none"
+		}
 
-			function setFan(e){
-				var x = document.getElementById("fantable").getElementsByTagName("td");
-				for (i in x)
-					if (x[i].className!="disp")
-						x[i].className = "";
-				e.className="selected";
-				document.getElementById("fan").value=e.innerHTML;
-				document.getElementById("fans").innerHTML=e.innerHTML;
-				if (e.innerHTML=="1") {
-					if (parseInt(document.getElementById("fu").value)<=25)
-						setFu(document.getElementById("defaultfu"));
-					var y = document.getElementById("futable").getElementsByTagName("td");
-					for (var i=1;i<=2;i++) {
-						y[i].childNodes[0].style.visibility="hidden";
-						y[i].setAttribute("onclick","");
-						y[i].style.cursor="auto";
-					}
-				} else {
-					var y = document.getElementById("futable").getElementsByTagName("td");
-					for (var i=1;i<=2;i++) {
-						y[i].childNodes[0].style.visibility="visible";
-						y[i].setAttribute("onclick","setFu(this)");
-						y[i].style.cursor="pointer";
-					}
+		function setFan(e){
+			var x = document.getElementById("fantable").getElementsByTagName("td");
+			for (i in x)
+				if (x[i].className!="disp")
+					x[i].className = "";
+			e.className="selected";
+			document.getElementById("fan").value=e.innerHTML;
+			document.getElementById("fans").innerHTML=e.innerHTML;
+			if (e.innerHTML=="1") {
+				if (parseInt(document.getElementById("fu").value)<=25)
+					setFu(document.getElementById("defaultfu"));
+				var y = document.getElementById("futable").getElementsByTagName("td");
+				for (var i=1;i<=2;i++) {
+					y[i].childNodes[0].style.visibility="hidden";
+					y[i].setAttribute("onclick","");
+					y[i].style.cursor="auto";
 				}
-				calculate();
+			} else {
+				var y = document.getElementById("futable").getElementsByTagName("td");
+				for (var i=1;i<=2;i++) {
+					y[i].childNodes[0].style.visibility="visible";
+					y[i].setAttribute("onclick","setFu(this)");
+					y[i].style.cursor="pointer";
+				}
 			}
-			function setFu(e){
-				var x = document.getElementById("futable").getElementsByTagName("td");
-				for (i in x)
-					if (x[i].className!="disp")
-						x[i].className = "";
-				e.className="selected";
-				document.getElementById("fu").value=e.textContent;
-				document.getElementById("fus").innerHTML=e.textContent;
-				calculate()
-			}
-			function showComment(c){
-				document.getElementById("comment").innerHTML=c;
-				document.getElementById("blackbg").style.display="block";
-				document.getElementById("commentwindow").style.display="block";
-			}
-			function hideComment(){
-				document.getElementById("blackbg").style.display="none";
-				document.getElementById("commentwindow").style.display="none";
-			}
-			function init(){
-				setFan(document.getElementById("defaultfan"));
-				setFu(document.getElementById("defaultfu"));
-				calculate();
-			}
-		</script>
-		<div class="title"> <p>简易日麻点数计算器</p>
-		<!-- <hr/> -->
-		</div>
-		<div class="main">
-		<table class="result">
-			<tbody>
-			<tr>
-				<td id="reserved"></td>
-				<td>庄家</td>
-				<td>闲家</td>
-			</tr>
-			<tr>
-				<td>自摸</td>
-				<td id="oyatsumo">-</td>
-				<td id="kotsumo">-</td>
-			</tr>
-			<tr>
-				<td>荣和</td>
-				<td id="oyaron">-</td> 
-				<td id="koron">-</td>
-			</tr>
-		</tbody></table>
-		<table class="fantable" id="fantable">
-			<tr>
-				<td rowspan="2" class="disp"><span class="big" id="fans">1</span><br/>翻</td>
-				<td onclick="setFan(this)" id="defaultfan" class="selected">1</td>
-				<td onclick="setFan(this)">2</td>
-				<td onclick="setFan(this)">3</td>
-				<td onclick="setFan(this)">4</td>
-				<td onclick="setFan(this)">5</td>
-				<td onclick="setFan(this)">6</td>
-				<td onclick="setFan(this)">7</td>
-			</tr>
-			<tr>
-				<td onclick="setFan(this)">8</td>
-				<td onclick="setFan(this)">9</td>
-				<td onclick="setFan(this)">10</td>
-				<td onclick="setFan(this)">11</td>
-				<td onclick="setFan(this)">12</td>
-				<td onclick="setFan(this)">13</td>
-				<td style="cursor: auto;"></td>
-			</tr>
-		</table>
-		<input id="fan" type="hidden" value="1"/>
-		<table class="fantable" id="futable">
-			<tr>
-				<td rowspan="2" class="disp"><span class="big" id="fus">30</span><br/>符</td>
-				<td onclick=""><span style="visibility:hidden;">20</span></td>
-				<td onclick=""><span style="visibility:hidden;">25</span></td>
-				<td onclick="setFu(this)" id="defaultfu" class="selected">30</td>
-				<td onclick="setFu(this)">40</td>
-				<td onclick="setFu(this)">50</td>
-				<td onclick="setFu(this)">60</td>
-			</tr>
-			<tr>
-				<td onclick="setFu(this)">70</td>
-				<td onclick="setFu(this)">80</td>
-				<td onclick="setFu(this)">90</td>
-				<td onclick="setFu(this)">100</td>
-				<td onclick="setFu(this)">110</td>
-				<td style="cursor: auto;"></td>
-			</tr>
-		</table>
-		<input id="fu" type="hidden" value="30"/>
-		<table class="options">
-			<tr>
-				<td colspan="2">
-					<input type="checkbox" id="kiriagemangan" />
-					<label for="kiriagemangan"><span></span>进位满贯<jp lang="ja-JP">（切り上げ満貫）</jp> </label>
-					<a href="javascript:showComment('基本点超过1900时即视为满贯。')">[?]</a>
-				</td>
-			</tr>
+			calculate();
+		}
+		function setFu(e){
+			var x = document.getElementById("futable").getElementsByTagName("td");
+			for (i in x)
+				if (x[i].className!="disp")
+					x[i].className = "";
+			e.className="selected";
+			document.getElementById("fu").value=e.textContent;
+			document.getElementById("fus").innerHTML=e.textContent;
+			calculate()
+		}
+		function showComment(c){
+			document.getElementById("comment").innerHTML=c;
+			document.getElementById("blackbg").style.display="block";
+			document.getElementById("commentwindow").style.display="block";
+		}
+		function hideComment(){
+			document.getElementById("blackbg").style.display="none";
+			document.getElementById("commentwindow").style.display="none";
+		}
+		function init(){
+			setFan(document.getElementById("defaultfan"));
+			setFu(document.getElementById("defaultfu"));
+			calculate();
+		}
+	</script>
+	<div class="title"> <p>简易日麻点数计算器</p>
+	<!-- <hr/> -->
+	</div>
+	<div class="main">
+	<table class="result">
+		<tbody>
+		<tr>
+			<td id="reserved"></td>
+			<td>庄家</td>
+			<td>闲家</td>
+		</tr>
+		<tr>
+			<td>自摸</td>
+			<td id="oyatsumo">-</td>
+			<td id="kotsumo">-</td>
+		</tr>
+		<tr>
+			<td>荣和</td>
+			<td id="oyaron">-</td> 
+			<td id="koron">-</td>
+		</tr>
+	</tbody></table>
+	<table class="fantable" id="fantable">
+		<tr>
+			<td rowspan="2" class="disp"><span class="big" id="fans">1</span><br/>翻</td>
+			<td onclick="setFan(this)" id="defaultfan" class="selected">1</td>
+			<td onclick="setFan(this)">2</td>
+			<td onclick="setFan(this)">3</td>
+			<td onclick="setFan(this)">4</td>
+			<td onclick="setFan(this)">5</td>
+			<td onclick="setFan(this)">6</td>
+			<td onclick="setFan(this)">7</td>
+		</tr>
+		<tr>
+			<td onclick="setFan(this)">8</td>
+			<td onclick="setFan(this)">9</td>
+			<td onclick="setFan(this)">10</td>
+			<td onclick="setFan(this)">11</td>
+			<td onclick="setFan(this)">12</td>
+			<td onclick="setFan(this)">13</td>
+			<td style="cursor: auto;"></td>
+		</tr>
+	</table>
+	<input id="fan" type="hidden" value="1"/>
+	<table class="fantable" id="futable">
+		<tr>
+			<td rowspan="2" class="disp"><span class="big" id="fus">30</span><br/>符</td>
+			<td onclick=""><span style="visibility:hidden;">20</span></td>
+			<td onclick=""><span style="visibility:hidden;">25</span></td>
+			<td onclick="setFu(this)" id="defaultfu" class="selected">30</td>
+			<td onclick="setFu(this)">40</td>
+			<td onclick="setFu(this)">50</td>
+			<td onclick="setFu(this)">60</td>
+		</tr>
+		<tr>
+			<td onclick="setFu(this)">70</td>
+			<td onclick="setFu(this)">80</td>
+			<td onclick="setFu(this)">90</td>
+			<td onclick="setFu(this)">100</td>
+			<td onclick="setFu(this)">110</td>
+			<td style="cursor: auto;"></td>
+		</tr>
+	</table>
+	<input id="fu" type="hidden" value="30"/>
+	<table class="options">
+		<tr>
+			<td colspan="2">
+				<input type="checkbox" id="kiriagemangan" />
+				<label for="kiriagemangan"><span></span>进位满贯<jp lang="ja-JP">（切り上げ満貫）</jp> </label>
+				<a href="javascript:showComment('基本点超过1900时即视为满贯。')">[?]</a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<input type="checkbox" id="sanma" />
+				<label for="sanma"><span></span>三麻 3:5 分配</label>
+				<a href="javascript:showComment('两家平分缺的那一家应付的点数，其它分配法参考四麻即可。')">[?]</a>
+			</td>
+			<td style="text-align: right;">
+			</td>
+		</tr>
+	</table>
+	<div class="bottom">&copy; 2015 Azige & Toufukun</div>
+	<div class="blackbg" id="blackbg" />
+	<div class="commentwindow" id="commentwindow">
+		<table style="width: 100%;">
 			<tr>
 				<td>
-					<input type="checkbox" id="sanma" />
-					<label for="sanma"><span></span>三麻 3:5 分配</label>
-					<a href="javascript:showComment('两家平分缺的那一家应付的点数，其它分配法参考四麻即可。')">[?]</a>
+					<span id="comment">然而并没有什么卵用。</span>
 				</td>
-				<td style="text-align: right;">
+			</tr>
+			<tr>
+				<td style="text-align: center;">
+					<button onclick="hideComment()" style="margin-top: 1em;" >好的么</button>	
 				</td>
 			</tr>
 		</table>
-		<div class="bottom">&copy; 2015 Azige & Toufukun</div>
-		<div class="blackbg" id="blackbg" />
-		<div class="commentwindow" id="commentwindow">
-			<table style="width: 100%;">
-				<tr>
-					<td>
-						<span id="comment">然而并没有什么卵用。</span>
-					</td>
-				</tr>
-				<tr>
-					<td style="text-align: center;">
-						<button onclick="hideComment()" style="margin-top: 1em;" >好的么</button>	
-					</td>
-				</tr>
-			</table>
-		</div>
-		</div>
-	
-</body></html>
+	</div>
+	</div>
+</body>
+</html>
