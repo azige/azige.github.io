@@ -20,8 +20,10 @@
 
   0. You just DO WHAT THE FUCK YOU WANT TO.
 -->
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1">
+<meta name="theme-color" content="#E61C64">
 		<style>
 			/* UI optimized by Toufukun */
 			body {
@@ -35,7 +37,7 @@
 				font-weight: bold;
 			}
 			.bottom {
-				color: #E61C64;
+				color: #AAA;
 				text-align: center;
 				font-size: 0.75em;
 			}
@@ -48,13 +50,17 @@
 				border-radius: 1px;
 				box-shadow: 0px 1px 4px #888888;
 			}
+			button:active {
+				background: #800f37;
+			}
 			.fantable {
 				border-collapse: collapse;
 				width: 100%;
 				margin: 1em 0;
 			}
-			.fantable .disp{
+			.fantable .disp {
 				width: 3em;
+				cursor: auto;
 			}
 			.fantable td {
 				border: #CCC solid 1px;
@@ -64,6 +70,7 @@
 				text-align: center; 
 				vertical-align: middle;
 				height: 2em;
+				cursor: pointer;
 			}
 			.fantable td.selected {
 				background: #E61C64;
@@ -71,6 +78,10 @@
 				/*font-weight: bold;*/
 				border-color: #E61C64;
 			}
+			/*.fantable td:active {
+				color: #FFF;
+				background: #800f37;
+			}*/
 			.big {
 				color: #E61C64;
 				font-size: 1.5em;
@@ -80,12 +91,15 @@
 			.main {
 				width: 360px; margin: auto;
 			}
-			#reserved{
+			#reserved {
 				color: #E61C64;
 				font-weight: bold;
 			}
 			input[type="checkbox"] {
 			    display:none;
+			}
+			input[type="checkbox"] + label {
+				cursor: pointer;
 			}
 			input[type="checkbox"] + label span {
 			    display:inline-block;
@@ -161,8 +175,8 @@
 					vertical-align: middle;
 					color: #FFF;
 					display:table-cell; 
-    				vertical-align: middle;
-    				padding-left: 16px;
+					vertical-align: middle;
+					padding-left: 16px;
 				}
 				hr { display: none; }
 				.main {
@@ -170,7 +184,7 @@
 					margin-left: auto;
 					margin-right: auto;
 				}
-				.commentwindow{
+				.commentwindow {
 					width: 12em;
 				}
 			}
@@ -181,9 +195,9 @@
 				}
 			}
 		</style>
-		<title>日麻点数计算</title>
+	<title>日麻点数计算</title>
 	</head>
-	<body onload="calculate()">
+	<body onload="init()">
 		<script>
 			function calculate(){
 				var fan = parseInt(document.getElementById('fan').value)
@@ -266,6 +280,23 @@
 				e.className="selected";
 				document.getElementById("fan").value=e.innerHTML;
 				document.getElementById("fans").innerHTML=e.innerHTML;
+				if (e.innerHTML=="1") {
+					if (parseInt(document.getElementById("fu").value)<=25)
+						setFu(document.getElementById("defaultfu"));
+					var y = document.getElementById("futable").getElementsByTagName("td");
+					for (var i=1;i<=2;i++) {
+						y[i].childNodes[0].style.visibility="hidden";
+						y[i].setAttribute("onclick","");
+						y[i].style.cursor="auto";
+					}
+				} else {
+					var y = document.getElementById("futable").getElementsByTagName("td");
+					for (var i=1;i<=2;i++) {
+						y[i].childNodes[0].style.visibility="visible";
+						y[i].setAttribute("onclick","setFu(this)");
+						y[i].style.cursor="pointer";
+					}
+				}
 				calculate();
 			}
 			function setFu(e){
@@ -274,8 +305,8 @@
 					if (x[i].className!="disp")
 						x[i].className = "";
 				e.className="selected";
-				document.getElementById("fu").value=e.innerHTML;
-				document.getElementById("fus").innerHTML=e.innerHTML;
+				document.getElementById("fu").value=e.textContent;
+				document.getElementById("fus").innerHTML=e.textContent;
 				calculate()
 			}
 			function showComment(c){
@@ -286,6 +317,11 @@
 			function hideComment(){
 				document.getElementById("blackbg").style.display="none";
 				document.getElementById("commentwindow").style.display="none";
+			}
+			function init(){
+				setFan(document.getElementById("defaultfan"));
+				setFu(document.getElementById("defaultfu"));
+				calculate();
 			}
 		</script>
 		<div class="title"> <p>简易日麻点数计算器</p>
@@ -313,7 +349,7 @@
 		<table class="fantable" id="fantable">
 			<tr>
 				<td rowspan="2" class="disp"><span class="big" id="fans">1</span><br/>翻</td>
-				<td onclick="setFan(this)" class="selected">1</td>
+				<td onclick="setFan(this)" id="defaultfan" class="selected">1</td>
 				<td onclick="setFan(this)">2</td>
 				<td onclick="setFan(this)">3</td>
 				<td onclick="setFan(this)">4</td>
@@ -328,16 +364,16 @@
 				<td onclick="setFan(this)">11</td>
 				<td onclick="setFan(this)">12</td>
 				<td onclick="setFan(this)">13</td>
-				<td/>
+				<td style="cursor: auto;"></td>
 			</tr>
 		</table>
 		<input id="fan" type="hidden" value="1"/>
 		<table class="fantable" id="futable">
 			<tr>
 				<td rowspan="2" class="disp"><span class="big" id="fus">30</span><br/>符</td>
-				<td onclick="setFu(this)">20</td>
-				<td onclick="setFu(this)">25</td>
-				<td onclick="setFu(this)" class="selected">30</td>
+				<td onclick=""><span style="visibility:hidden;">20</span></td>
+				<td onclick=""><span style="visibility:hidden;">25</span></td>
+				<td onclick="setFu(this)" id="defaultfu" class="selected">30</td>
 				<td onclick="setFu(this)">40</td>
 				<td onclick="setFu(this)">50</td>
 				<td onclick="setFu(this)">60</td>
@@ -348,7 +384,7 @@
 				<td onclick="setFu(this)">90</td>
 				<td onclick="setFu(this)">100</td>
 				<td onclick="setFu(this)">110</td>
-				<td/>
+				<td style="cursor: auto;"></td>
 			</tr>
 		</table>
 		<input id="fu" type="hidden" value="30"/>
