@@ -1,68 +1,143 @@
 title = "首页"
 
-def project(args){
-"""
-### [${args.name}](https://github.com/${strings.name}/${args.repository})
-
-${args.description}
-"""
+def projects(args){
+	def s = new StringBuilder()
+	s << '<div class="row">\n'
+	def count = 0
+	for (def p in args){
+		s << '<div class="col-md-6">\n'
+		s << '<a class="thumbnail blocklink project" href="' + "https://github.com/azige/${p.repo}" + '">\n'
+		s << '<div class="caption">\n'
+		s << "<h3>${p.name}</h3>\n"
+		s << "<p>${p.desc}</p>\n"
+		s << '</div>\n'
+		s << '</a>\n'
+		s << '</div>\n'
+		if (++count % 2 == 0){
+			s << '</div>\n'
+			s << '<div class="row">\n'
+		}
+	}
+	s << '</div>\n'
+	return s
 }
 
-def video(args){
-"""
-<p><a href="${args.url}"><img src="${args.thumb}" alt="${args.title}" align="middle">${args.title}</a></p>
-"""
+def videos(args){
+	def s = new StringBuilder()
+	s << '<div class="row">\n'
+	def count = 0
+	for (def v in args){
+		s << '<a class="blocklink" href="' + v.url + '">\n'
+		s << '<div class="col-md-4 video">\n'
+		s << '<img src="' + v.thumb + '" alt="' + v.title + '">\n'
+		s << "<p>${v.title}</p>\n"
+		s << '</div>\n'
+		s << '</a>\n'
+		if (++count % 3 == 0){
+			s << '</div>\n'
+			s << '<div class="row">\n'
+		}
+	}
+	s << '</div>\n'
+	return s
 }
 
 // Start content
 """
-# 欢迎 #
-
-本站点尚处于开发阶段。
-
-## 博文
-
-${blogs}
-
-## 项目
-
-${project(
-    name: "Azige.JSON",
-    repository: "azige.json",
-    description: "实现了JSR-353所定义的接口的JSON处理库。"
-)}
-
-${project(
-    name: "GMarkdown",
-    repository: "GMarkdown",
-    description: "本站点是用这玩意生成的。"
-)}
-
-[更多……](https://github.com/azige)
-
-## 视频作品
-
-<div id="video_list">
-
-${video(
-    title: "【金坷垃】坷垃Hero",
-    thumb: "http://i0.hdslb.com/user/609/60911/133583832103b5c85296b84213.png",
-    url: "http://www.bilibili.tv/video/av257849/"
-)}
-
-${video(
-    title: "【洛天依】from Y to Y【中翻翻】",
-    thumb: "http://i1.hdslb.com/user/609/60911/13433717349b61c76bbef978f1.png",
-    url: "http://www.bilibili.tv/video/av320003/"
-)}
-
-${video(
-    title: "【日常の金坷垃】圣地亚戈の金金坷垃☆我要金坷垃",
-    thumb: "http://i2.hdslb.com/user/609/60911/13150420576d8f21d69c91ddde.png",
-    url: "http://www.bilibili.tv/video/av86465/"
-)}
-
+<div class="row">
+    <div class="col-md-4">
+		<div class=" panel panel-default">
+			<div class="panel-body">
+				<h3>博文</h3>
+				<hr/>
+				${blogs}
+			</div>
+		</div>
+	</div>
+	<div class="col-md-8">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<h3>项目</h3>
+				<hr/>
+				${projects([
+					[
+						name: "Azige.JSON",
+						repo: "azige.json",
+						desc: "实现了JSR-353所定义的接口的JSON处理库。"
+					],
+					[
+						name: "Mages",
+						repo: "mages",
+						desc: "基于Groovy与Markdown的静态站点生成器。本站点是用此工具生成的。"
+					],
+					[
+						name: "Whitespace 解释器",
+						repo: "whitespace-interpreter",
+						desc: "一个Java版本的Whitespace语言的解释器。"
+					]
+				])}
+			</div>
+			<div class="panel-footer">
+				<a href="https://github.com/azige?tab=repositories">更多</a>
+			</div>
+		</div>
+	</div>
 </div>
-
-[更多……](http://space.bilibili.tv/60911)
+<div class="panel panel-default">
+	<div class="panel-body">
+		<h3>视频作品</h3>
+		<hr/>
+		${videos([
+			[
+			    title: "【金坷垃】坷垃Hero",
+				thumb: "http://i0.hdslb.com/user/609/60911/133583832103b5c85296b84213.png",
+				url: "http://www.bilibili.com/video/av257849/"
+			],
+			[
+			    title: "【金坷垃】红莲之金坷垃",
+				thumb: "http://i2.hdslb.com/u_f/23c5ea79541657f5d792a3abdda4fb17.png",
+				url: "http://www.bilibili.com/video/av729850/"
+			],
+			[
+			    title: "【日常の金坷垃】圣地亚戈の金金坷垃☆我要金坷垃",
+				thumb: "http://i2.hdslb.com/user/609/60911/13150420576d8f21d69c91ddde.png",
+				url: "http://www.bilibili.com/video/av86465/"
+			],
+			[
+			    title: "【金坷垃】とても痛い痛がりたい",
+				thumb: "http://i0.hdslb.com/user/609/60911/1330171654660c09feb35a2890.png",
+				url: "http://www.bilibili.com/video/av221707/"
+			],
+			[
+			    title: "【金坷垃】氯苯金坷垃",
+				thumb: "http://i0.hdslb.com/user/609/60911/1328271331c74efe3a47aec879.png",
+				url: "http://www.bilibili.com/video/av210175/"
+			],
+			[
+			    title: "【洛天依】至此 我不再独自前行【Cover】",
+				thumb: "http://i2.hdslb.com/u_f/419db21479438ea47ce0e863e00fdd90.jpg",
+				url: "http://www.bilibili.com/video/av537407/"
+			],
+			[
+			    title: "【洛天依】from Y to Y【中翻翻】",
+				thumb: "http://i1.hdslb.com/user/609/60911/13433717349b61c76bbef978f1.png",
+				url: "http://www.bilibili.com/video/av320003/"
+			],
+			[
+			    title: "【VY1】ODDS&ENDS【Cover】",
+				thumb: "http://i2.hdslb.com/u_f/25ddf6b804cadf1939ff8086475b66b4.jpg",
+				url: "http://www.bilibili.com/video/av413562/"
+			],
+			[
+			    title: "【VY1】裏表ラバーズ",
+				thumb: "http://i0.hdslb.com/u_user/fd71e817b120bc1e507d9ae41645154f.jpg",
+				url: "http://www.bilibili.com/video/av2070186/"
+			],
+			
+		])}
+	</div>
+	<div class="panel-footer">
+		<a href="http://space.bilibili.com/60911">更多</a>
+	</div>
+</div>
 """

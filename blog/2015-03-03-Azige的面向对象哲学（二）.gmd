@@ -1,7 +1,7 @@
-title = "Azige的面向对象哲学（二）"
+title = "Azige鐨勯潰鍚戝璞″摬瀛︼紙浜岋級"
 
 """
-${new File("blog/2015-03-03-Azige的面向对象哲学（二）.md").text}
+${new File("blog/2015-03-03-Azige鐨勯潰鍚戝璞″摬瀛︼紙浜岋級.md").text}
 
 ${comment}
 """

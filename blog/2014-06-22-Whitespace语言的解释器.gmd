@@ -1,7 +1,7 @@
-title = "Whitespace语言的解释器"
+title = "Whitespace璇█鐨勮В閲婂櫒"
 
 """
-${new File("blog/2014-06-22-Whitespace语言的解释器.md").text}
+${new File("blog/2014-06-22-Whitespace璇█鐨勮В閲婂櫒.md").text}
 
 ${comment}
 """
