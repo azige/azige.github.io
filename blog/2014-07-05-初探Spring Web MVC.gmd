@@ -1,7 +1,0 @@
-title = "初探Spring Web MVC"
-
-"""
-${new File("blog/2014-07-05-初探Spring Web MVC.md").text}
-
-${comment}
-"""

@@ -1,7 +1,0 @@
-title = "Azige的面向对象哲学（二）"
-
-"""
-${new File("blog/2015-03-03-Azige的面向对象哲学（二）.md").text}
-
-${comment}
-"""
